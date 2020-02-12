@@ -6,24 +6,25 @@
 #    By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/09 13:12:46 by gozsertt          #+#    #+#              #
-#    Updated: 2020/02/09 13:13:13 by gozsertt         ###   ########.fr        #
+#    Updated: 2020/02/12 18:26:08 by gozsertt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ggl.a
+NAME		= libgg.a
+MLXNAME		= libmlx.a
 
 CC =		gcc
 
 SRC_DIR = 	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d)
-# LIB_DIR =
+LIB_DIR =	mlx
 OBJ_DIR = 	obj
 
 vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 
 # # List de toute les library a linker au projet (le nom - le lib et - le .a)
 
-SRC = $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
+SRC = $(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))#norme
 
 OBJ2 = $(OBJ1:%.m=%.o)
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
@@ -50,6 +51,14 @@ all:
 				@echo "\n$(_BLUE)___$(NAME) Setting___\n$(_WHITE)"
 				@make $(NAME)
 
+$(NAME): 		$(OBJ) Makefile
+				@echo "-----\nCreating Graphical library $(_YELLOW)$@$(_WHITE) ... \c"
+				@ar -rcs $(NAME) $(OBJ)
+				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
+				@echo "\n-----\nCreating MLX library $(_YELLOW)$(MLXNAME)$(_WHITE) ... \n"
+				@make -C lib/mlx all
+				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
+
 show:
 				@echo "$(_BLUE)SRC :\n$(_YELLOW)$(SRC)$(_WHITE)"
 				@echo "$(_BLUE)OBJ :\n$(_YELLOW)$(OBJ)$(_WHITE)"
@@ -69,12 +78,6 @@ $(OBJ_DIR)/%.o : %.m
 				@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 				@echo "$(_GREEN)DONE$(_WHITE)"
 
-$(NAME): 		$(OBJ) Makefile
-				@echo "-----\nCreating library $(_YELLOW)$@$(_WHITE) ... \c"
-				@ar -rc $(NAME) $(OBJ)
-				@ranlib $(NAME)
-				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
-
 norme:
 				norminette $(SRC_DIR)
 
@@ -86,8 +89,10 @@ clean:
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 fclean:			clean
-				@echo "Deleting Binary File $(_YELLOW)$(NAME)$(_WHITE) ... \c"
+				@echo "Deleting Graphical Binary File $(_YELLOW)$(NAME)$(_WHITE) ... \n"
 				@rm -f $(NAME)
+				@echo "Deleting Graphical MLX Binary File $(_YELLOW)$(MLXNAME)$(_WHITE) ... \n"
+				@make -C lib/mlx clean
 				@echo "$(_GREEN)DONE$(_WHITE)\n-----"
 
 .PHONY: all clean flcean re show

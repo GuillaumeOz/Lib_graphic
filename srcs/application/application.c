@@ -6,42 +6,62 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 12:07:29 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/09 13:31:49 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/12 21:08:53 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-t_application	create_application(int x, int y, char *title)
+void start_application(int size_x, int size_y, char *title)
 {
-	t_application result;
-
-	result.mlx_ptr = mlx_init(); // protect the return value $ env -i <votre-executable>
-	result.win_ptr = mlx_new_window(result.mlx_ptr, x, y, title); // Same
-	result.img_ptr = mlx_new_image(result.mlx_ptr, x, y); //Same
-	result.pixels = mlx_get_data_addr(result.img_ptr, &(result.bits_per_pixels),
-				   &(result.size_line), &(result.endian));
-	return (result);
+	g_app = (t_application*)malloc(sizeof(t_application));
+	if (g_app == NULL)
+		perror("Error\n The application can't be malloc");
+	g_app->mlx_ptr = mlx_init();
+	g_app->size = create_vector2(size_x, size_y);
+	g_app->win_ptr = mlx_new_window(g_app->mlx_ptr, g_app->size.x, g_app->size.y, title);
+	g_app->image = NULL;
 }
 
-t_application	*malloc_application(int x, int y, char *title)
+void close_application() // call by the ESC KEY
 {
-	t_application *application;
-
-	if((!(application = (t_application*)malloc(sizeof(t_application)))))
-		return (NULL);
-	*application = create_application(x, y, title);
-	return (application);
+	free_image(g_app->image);
+	mlx_destroy_window(g_app->mlx_ptr, g_app->win_ptr);
+	free(g_app);
+	write(1, "The application has been closed", 32);
+	exit(0);
 }
 
-void			destroy_application(t_application to_destroy)
+void		clear_application(t_color color)
 {
-	mlx_destroy_image(to_destroy.mlx_ptr, to_destroy.img_ptr);
-	mlx_destroy_window(to_destroy.mlx_ptr, to_destroy.win_ptr);
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (i < (size_t)g_app->size.x)
+	{
+		j = 0;
+		while (j < (size_t)g_app->size.y)
+		{
+			put_pixel(g_app->image, i, j, color);
+			j++;
+		}
+		i++;
+	}
 }
 
-void			free_application(t_application *to_free)
+void application_create_content()
 {
-	destroy_application(*to_free);
-	free(to_free);
+	g_app->image = malloc_image(g_app->size.x, g_app->size.y);
+}
+
+void render_application()
+{
+	mlx_put_image_to_window(g_app->mlx_ptr, g_app->win_ptr, g_app->image->img_ptr, 0, 0);
+}
+
+int run_application()
+{
+	mlx_loop(g_app->mlx_ptr);
+	return (0);
 }

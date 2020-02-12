@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_rectangle.c                                   :+:      :+:    :+:   */
+/*   ggl_math.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 13:51:34 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/12 19:50:26 by gozsertt         ###   ########.fr       */
+/*   Created: 2020/02/12 15:57:47 by gozsertt          #+#    #+#             */
+/*   Updated: 2020/02/12 15:59:58 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ggl.h"
+#ifndef GGL_MATH_H
+# define GGL_MATH_H
 
-void draw_rectangle(t_vector2 pos, t_vector2 size, t_color color)
-{
-	draw_rectangle_in_image(g_app->image, pos, size, color);
-}
+float degree_to_radian(float p_degree);
+float radian_to_degree(float p_radian);
 
-void draw_rectangle_in_image(t_image *image, t_vector2 pos, t_vector2 size, t_color color)
-{
-	size_t i;
-	size_t j;
-
-	i = 0;
-	while (i < size.x)
-	{
-		j = 0;
-		while (j < size.y)
-		{
-			put_pixel(image, i + pos.x, j + pos.y, color);
-			j++;
-		}
-		i++;
-	}
-}
+#endif

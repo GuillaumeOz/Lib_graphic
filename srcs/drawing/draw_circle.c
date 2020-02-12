@@ -6,37 +6,37 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:51:12 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/09 13:56:30 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/12 20:28:16 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-void	draw_circle(t_config *config, t_application *application, t_vector2 circle_pos, t_vector4 *rounded)
+void draw_circle(t_vector2 pos, int radius, t_color color)
 {
-	t_color		circle_color;
-	t_vector2	pos;
-	int			radius;
-	int			i;
-	int			j;
+	draw_circle_in_image(g_app->image, pos, radius, color);
+}
 
-	i = -1;
-	j = -1;
-	radius = 100;
-	rounded->x = 0.0;
-	circle_color = create_color(100, 100, 100, 255);// apply the fuze for alpha
-	pos = create_vector2((circle_pos.x - radius), (circle_pos.y - radius));
-	while (++i <= (radius + circle_pos.y))
+void	draw_circle_in_image(t_image *image, t_vector2 pos, int radius, t_color color)
+{
+	t_vector2	actual_pos;
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	pos = create_vector2((actual_pos.x - radius), (actual_pos.y - radius));
+	while (i < (pos.x + radius))
 	{
-		pos.y = i;
-		while (++j <= (radius + circle_pos.y))
+		j = 0;
+		actual_pos.y = i;
+		while (j < (pos.y + radius))
 		{
-			if (pow(radius, 2) >= (pow(circle_pos.x - pos.x, 2) + pow(circle_pos.y - pos.y, 2)))// The condition for print out of range
+			if (pow(radius, 2) >= (pow(actual_pos.x - pos.x, 2) + pow(actual_pos.y - pos.y, 2)))
 			{
-				put_pixel(config, application, pos, circle_color);
+				put_pixel(image, actual_pos.x, actual_pos.y, color);
 			}
-			pos.x = j;
+			j++;
+			actual_pos.x = j;
 		}
-		j = -1;
 	}
 }

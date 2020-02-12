@@ -6,24 +6,30 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 13:52:03 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/09 13:54:07 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/11 15:36:59 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-void	put_pixel(t_config *config, t_application *application, t_vector2 pos, t_color color)
+void put_pixel(t_image *image, int x, int y, t_color color)
 {
+	t_color actual;
+	t_color tmp;
 	int pixel_index;
-	int rel_pixel_index;
 
-	if (pos.x < 0 || pos.x >= config->resolution_size->x || pos.y < 0 ||
-		pos.y >= config->resolution_size->y)
-		return ;
-	pixel_index = pos.x + (pos.y * config->resolution_size->x);
-	rel_pixel_index = pixel_index * 4;
-	application->pixels[rel_pixel_index + BLUE_COMP] = color.b;
-	application->pixels[rel_pixel_index + GREEN_COMP] = color.g;
-	application->pixels[rel_pixel_index + RED_COMP] = color.r;
-	application->pixels[rel_pixel_index + ALPHA_COMP] = color.t; // call the fuze color function here
+	if (x < 0 || y < 0 || x >= image->size.x || y >= image->size.y)
+		return;
+
+	pixel_index = (y * image->size.x + x) * 4;
+	actual = create_color(
+		image->pixels[pixel_index + RED_COMP],
+		image->pixels[pixel_index + GREEN_COMP],
+		image->pixels[pixel_index + BLUE_COMP],
+		255
+	);
+	tmp = fuze_color(actual, color);
+	image->pixels[pixel_index + RED_COMP] = tmp.r;
+	image->pixels[pixel_index + GREEN_COMP] = tmp.g;
+	image->pixels[pixel_index + BLUE_COMP] = tmp.b;
 }

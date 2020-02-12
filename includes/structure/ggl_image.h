@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_rectangle.c                                   :+:      :+:    :+:   */
+/*   ggl_image.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 13:51:34 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/12 19:50:26 by gozsertt         ###   ########.fr       */
+/*   Created: 2020/02/10 13:11:21 by gozsertt          #+#    #+#             */
+/*   Updated: 2020/02/10 14:08:54 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ggl.h"
+#ifndef GGL_IMAGE_H
+# define GGL_IMAGE_H
 
-void draw_rectangle(t_vector2 pos, t_vector2 size, t_color color)
+typedef struct	s_image
 {
-	draw_rectangle_in_image(g_app->image, pos, size, color);
-}
+	t_vector2	size;
+	void		*img_ptr;
+	char		*pixels;
+	int			bits_per_pixels;
+	int			size_line;
+	int			endian;
+}				t_image;
 
-void draw_rectangle_in_image(t_image *image, t_vector2 pos, t_vector2 size, t_color color)
-{
-	size_t i;
-	size_t j;
+t_image			*malloc_image(int size_x, int size_y);
+t_image			create_image(int size_x, int size_y);
+void			destroy_image(t_image to_destroy);
+void			free_image(t_image *to_free);
 
-	i = 0;
-	while (i < size.x)
-	{
-		j = 0;
-		while (j < size.y)
-		{
-			put_pixel(image, i + pos.x, j + pos.y, color);
-			j++;
-		}
-		i++;
-	}
-}
+#endif
