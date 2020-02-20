@@ -6,7 +6,7 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 11:48:07 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/12 21:11:16 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/20 20:14:07 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_application
 
 void			start_application(int size_x, int size_y, char *title);
 void			close_application();
+
 void			clear_application(t_color color);
 void			application_create_content();
 void			render_application();

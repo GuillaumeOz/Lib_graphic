@@ -6,12 +6,12 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:11:56 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/09 13:13:54 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:30:46 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GGL_VECTOR_H
-# define GGL_VECTOR_H
+#ifndef GGL_VECTOR4_H
+# define GGL_VECTOR4_H
 
 typedef struct	s_vector4
 {
