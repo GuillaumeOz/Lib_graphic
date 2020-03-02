@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_functions.c                                  :+:      :+:    :+:   */
+/*   ggl_putstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 12:41:59 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/03/02 13:53:47 by gozsertt         ###   ########.fr       */
+/*   Created: 2020/02/28 13:09:58 by gozsertt          #+#    #+#             */
+/*   Updated: 2020/02/28 13:56:35 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-float degree_to_radian(float p_degree)
+void	ggl_putstr(char const *s)
 {
-	return (p_degree * M_PI / 180);
-}
+	size_t len;
 
-float radian_to_degree(float p_radian)
-{
-	return (p_radian * 180 / M_PI);
+	len = ggl_strlen(s);
+	write(1, s, len);
 }

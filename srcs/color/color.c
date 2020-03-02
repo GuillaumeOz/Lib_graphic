@@ -6,7 +6,7 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/30 12:38:46 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/11 11:07:33 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/26 12:32:14 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_color		*malloc_color(t_uchar p_r, t_uchar p_g, t_uchar p_b, t_uchar p_a)
 
 	color = (t_color*)malloc(sizeof(t_color));
 	if (color == NULL)
-		return (NULL);
+		ggl_error("Error 1\n Can't malloc t_color in constructor");
 	*color = create_color(p_r, p_g, p_b, p_a);
 	return (color);
 }

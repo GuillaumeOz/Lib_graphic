@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_functions.c                                  :+:      :+:    :+:   */
+/*   ggl_basic_functions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 12:41:59 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/03/02 13:53:47 by gozsertt         ###   ########.fr       */
+/*   Created: 2020/02/24 19:47:56 by gozsertt          #+#    #+#             */
+/*   Updated: 2020/02/28 13:59:53 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ggl.h"
+#ifndef GGL_BASIC_FUNCTIONS_H
+# define GGL_BASIC_FUNCTIONS_H
 
-float degree_to_radian(float p_degree)
-{
-	return (p_degree * M_PI / 180);
-}
+size_t	ggl_strlen(const char *str);
+void    ggl_putstr(const char *str);
 
-float radian_to_degree(float p_radian)
-{
-	return (p_radian * 180 / M_PI);
-}
+#endif

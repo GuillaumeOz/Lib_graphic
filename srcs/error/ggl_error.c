@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle_functions.c                                  :+:      :+:    :+:   */
+/*   ggl_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 12:41:59 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/03/02 13:53:47 by gozsertt         ###   ########.fr       */
+/*   Created: 2020/02/24 19:48:52 by gozsertt          #+#    #+#             */
+/*   Updated: 2020/02/24 22:07:09 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-float degree_to_radian(float p_degree)
+void	ggl_error(char *error_msg)
 {
-	return (p_degree * M_PI / 180);
-}
+    int     i;
+    size_t  len;
 
-float radian_to_degree(float p_radian)
-{
-	return (p_radian * 180 / M_PI);
+    i = -1;
+    len = ggl_strlen(error_msg);
+    write(1, error_msg, len);
+	exit(0);
 }

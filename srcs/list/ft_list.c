@@ -6,7 +6,7 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:51:40 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/20 13:52:07 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/24 22:14:10 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*malloc_list(size_t p_push_size)
 
 	result = (t_list *)malloc(sizeof(t_list));
 	if (result == NULL)
-		perror("Can't malloc a t_list");
+		ggl_error("Error 1\n Can't malloc a t_list");
 	*result = create_list(p_push_size);
 	return (result);
 }
@@ -59,7 +59,7 @@ void	clear_list(t_list *to_clear, destroy_funct funct)
 	to_clear->size = 0;
 }
 
-void free_list(t_list *to_free, destroy_funct funct)
+void	free_list(t_list *to_free, destroy_funct funct)
 {
 	destroy_list(*to_free, funct);
 	free(to_free);

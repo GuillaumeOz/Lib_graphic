@@ -6,7 +6,7 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 13:17:43 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/02/09 12:44:43 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/02/24 22:21:10 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vector4	*malloc_vector4(float x, float y, float z, float w)
 	
 	vector4 = (t_vector4*)malloc(sizeof(t_vector4));
 	if (vector4 == NULL)
-		return (NULL);
+		ggl_error("Error 1\n A vector4 can't be malloc");
 	*vector4 = create_vector4(x, y, z, w);
 	return (vector4);
 }
