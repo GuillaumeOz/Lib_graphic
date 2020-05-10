@@ -6,20 +6,16 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 17:23:10 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/05/05 14:25:03 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/05/09 14:46:35 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-void	application_create_content(void)
+void	add_interaction_exit_control(t_exit_funct funct, int event,
+	int maskevent, void *param)
 {
-	g_app->image = malloc_image(g_app->size.x, g_app->size.y);
-}
-
-void	add_interaction_exit_control(t_exit_funct funct, int event)
-{
-	mlx_hook(g_app->win_ptr, event, 0L, funct, (void*)0);
+	mlx_hook(g_app->win_ptr, event, maskevent, funct, param);
 }
 
 void	add_interaction_to_application(t_key_funct funct, int event,

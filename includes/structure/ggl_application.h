@@ -6,7 +6,7 @@
 /*   By: gozsertt <gozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 11:48:07 by gozsertt          #+#    #+#             */
-/*   Updated: 2020/05/05 15:38:59 by gozsertt         ###   ########.fr       */
+/*   Updated: 2020/05/09 14:46:38 by gozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct	s_application
 
 typedef int		(*t_key_funct)(int key, void *param);
 typedef int		(*t_render_funct)(void *param);
-typedef int		(*t_exit_funct)(void);
+typedef int		(*t_exit_funct)(void *param);
 
 void			start_application(int size_x, int size_y, char *title);
 void			close_application(void);
@@ -39,7 +39,8 @@ int				run_application(void);
 
 void			add_interaction_to_application(t_key_funct funct, int event,
 					int maskevent, void *param);
-void			add_interaction_exit_control(t_exit_funct funct, int event);
+void			add_interaction_exit_control(t_exit_funct funct, int event,
+					int maskevent, void *param);
 void			application_update(t_render_funct funct, void *param);
 void			render_application(void);
 
